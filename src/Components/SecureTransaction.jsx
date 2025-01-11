@@ -146,14 +146,8 @@ const SecureTransaction = () => {
       <div className="">
         <div className="flex flex-col items-center justify-center px-4 py-10">
           <h1 className="mb-4 text-3xl font-bold text-center text-black dark:text-white">
-            SecureTrace Transactions
+            Secure3 
           </h1>
-
-          <p className="max-w-2xl mb-6 font-semibold text-center text-gray-600 dark:text-gray-300">
-            SecureTrace analyzes transaction data using specialized blockchain
-            forensic techniques, enhancing the detection of intricate patterns
-            and potential vulnerabilities.
-          </p>
 
           <form onSubmit={handleSearchSubmit} className="w-full md:max-w-4xl">
             <input
@@ -186,9 +180,7 @@ const SecureTransaction = () => {
 
         <div className=" w-full xl:w-[48%] flex justify-center items-center">
           <div className="w-full ">
-            {/*<h3 className="mb-4 ml-0 text-xl font-semibold text-center text-green-500 lg:ml-16 xl:text-left ">
-              TRENDING TOKEN PAGES
-            </h3>}*/}
+           
             <div
               className=" h-[520px] w-full overflow-y-auto"
               id="hide-scrollbar"
