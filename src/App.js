@@ -5,7 +5,7 @@ import PortfolioTracker from "./Components/PortfolioTracker";
 import Visualizer from "./Components/Visualizer";
 import LoginPage from "./Components/LoginPage";
 import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
+
 import CreditScore from "./Components/CreditScore";
 // import SecureTransaction from "./Components/SecureTransaction";
 

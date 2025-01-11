@@ -19,7 +19,7 @@ const PortfolioTracker = () => {
                 </div>
             </div> */}
             {/* <div className='text-black my-10'>
-                <h1 className='text-center'>support@securetrace.io - securedapp.io - 2024 </h1>
+                <h1 className='text-center'>support@securetrace.io - Secure3.io - 2024 </h1>
                 <h1 className='text-center'>Terms od service and privacy</h1>
             </div> */}
             

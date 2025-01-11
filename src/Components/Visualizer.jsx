@@ -44,8 +44,6 @@ const Visualizer = () => {
   const sortedTransfers = transfers.sort(
     (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
   );
-
-  
   const currentRows1 = sortedTransfers.slice(
     (currentPage1 - 1) * rowsPerPage1,
     currentPage1 * rowsPerPage1
