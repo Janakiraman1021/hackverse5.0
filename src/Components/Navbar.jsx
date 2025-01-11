@@ -70,9 +70,9 @@ const Navbar = () => {
 
 
     return (
-        <nav className="bg-[#303030] p-4 rounded-full flex justify-between items-center mx-4 lg:mx-32">
+        <nav className="bg-[#303030] p-4  rounded-md flex justify-between items-center mx-4 ">
             <div className="text-white font-bold text-2xl ml-4 ">
-                SecureTrace
+                Secure3
             </div>
 
 
@@ -80,7 +80,7 @@ const Navbar = () => {
                 <Link to="/" className="hover:text-gray-400">Dashboard</Link>
                 <Link to="/visualizer" className="hover:text-gray-400">Visualizer</Link>
                 <Link to="/portfoliotracker" className="hover:text-gray-400">Portfolio Tracker</Link>
-                <Link to="/creditscore" className="hover:text-gray-400">Credit Score</Link>
+                
             </div>
             {/* <div className='text-white flex justify-end'>
             <IoSunnyOutline />
@@ -88,15 +88,7 @@ const Navbar = () => {
             </div> */}
             {userEmail ? (
                 <div className="relative hidden lg:flex" ref={dropdownRef}>
-                    <div className='flex gap-4'>
-                        <div className='text-white text-2xl mt-2 cursor-pointer' onClick={toggleTheme}>
-                            {/* <IoSunnyOutline /> */}
-                            {/* <IoMoonOutline /> */}
-                            {darkMode ? <TbBrightnessUp /> : <IoMoonOutline />}
-
-                        </div>
-                        <button onClick={toggleLogout} className="hidden lg:flex bg-white text-black rounded-full px-4 py-2">{userEmail}</button>
-                    </div>
+                    
                     {showLogout && (
                         <div className="absolute right-0 mt-12 bg-white text-black rounded-md shadow-lg py-2">
                             <button
@@ -110,17 +102,8 @@ const Navbar = () => {
                 </div>
             ) : (
                 <div className='hidden lg:flex justify-center gap-4'>
-                    <div className='text-white text-2xl mt-2 cursor-pointer' onClick={toggleTheme}>
-                        {/* <IoSunnyOutline /> */}
-                        {/* <IoMoonOutline /> */}
-                        {darkMode ? <TbBrightnessUp /> : <IoMoonOutline />}
-
-                    </div>
-                    <Link to='/loginpage'>
-                        <button className="hidden lg:flex bg-white text-black rounded-full px-4 py-2">
-                            Login
-                        </button>
-                    </Link>
+                    
+                    
                 </div>
             )}
 
@@ -141,7 +124,7 @@ const Navbar = () => {
                     <Link to="/" className="hover:text-gray-400" onClick={toggleMenu}>Dashboard</Link>
                     <Link to="/visualizer" className="hover:text-gray-400" onClick={toggleMenu}>Visualizer</Link>
                     <Link to="/portfoliotracker" className="hover:text-gray-400" onClick={toggleMenu}>Portfolio Tracker</Link>
-                    <Link to="/creditscore" className="hover:text-gray-400" onClick={toggleMenu}>Credit Score</Link>
+                    
                     {userEmail ? (
                         <div className="relative flex lg:hidden" ref={dropdownRef}>
                                 <button onClick={toggleLogout} className="lg:hidden flex bg-white text-black rounded-full px-4 py-2">{userEmail}</button>

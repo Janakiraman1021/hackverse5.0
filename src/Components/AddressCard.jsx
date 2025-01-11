@@ -9,7 +9,7 @@ import axios from "axios";
 import btc from "../Assests/Bitcoin.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DevUrl } from "../Constants";
+import { Lhost } from "../Constants";
 import { useLocation } from "react-router-dom";
 import Footer from "./Footer";
 
@@ -105,8 +105,8 @@ const AddressCard = () => {
     }
 
     const apiEndpoint = algoAddressRegex.test(inputValue)
-      ? `${DevUrl}/fetch-algorand-details/`
-      : `${DevUrl}/fetch-address-details/`;
+      ? `${Lhost}/fetch-algorand-details/`
+      : `${Lhost}/fetch-address-details/`;
 
     try {
       const response = await axios.post(apiEndpoint, { address: inputValue });
@@ -133,7 +133,7 @@ const AddressCard = () => {
     try {
       if (ethAddressRegex.test(inputValue)) {
         const response1 = await axios.post(
-          `${DevUrl}/token-transfers/`,
+          `${Lhost}/token-transfers/`,
           {
             address: inputValue,
           },
@@ -149,7 +149,7 @@ const AddressCard = () => {
         setTransfers(combinedTransfers);
       } else if (algoAddressRegex.test(inputValue)) {
         const response1 = await axios.post(
-          `${DevUrl}/algo-transfers/`,
+          `${Lhost}/algo-transfers/`,
           {
             address: inputValue,
           },

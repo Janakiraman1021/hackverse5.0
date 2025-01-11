@@ -20,7 +20,7 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DevUrl } from "../Constants";
+import { Lhost } from "../Constants";
 import { useTheme } from "./ThemeContext";
 
 const SecureTransaction = () => {
@@ -69,7 +69,7 @@ const SecureTransaction = () => {
       setLoading(true);
 
       try {
-        const response = await axios.post(`${DevUrl}/recent-txs`, {
+        const response = await axios.post(`${Lhost}/recent-txs`, {
           headers: {
             "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const SecureTransaction = () => {
       setLoading(true);
 
       try {
-        const response = await axios.post(`${DevUrl}/top-tokens`, {
+        const response = await axios.post(`${Lhost}/top-tokens`, {
           headers: {
             "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json",

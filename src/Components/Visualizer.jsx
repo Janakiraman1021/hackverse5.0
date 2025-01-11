@@ -5,7 +5,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { isAddress } from "ethers";
 import axios from "axios";
-import { DevUrl } from "../Constants";
+import { Lhost } from "../Constants";
 import btc from "../Assests/Bitcoin.png";
 import { useParams } from "react-router-dom";
 import Footer from "./Footer";
@@ -123,7 +123,7 @@ const Visualizer = () => {
         });
 
         response = await axios.post(
-          `${DevUrl}/token-transfers/`,
+          `${Lhost}/token-transfers/`,
           {
             address: value,
             startDate: formData?.fromDate || null,
@@ -147,7 +147,7 @@ const Visualizer = () => {
         console.log("Scanning Transaction Hash:", value);
 
         response = await axios.post(
-          `${DevUrl}/fetch-transaction-details/`,
+          `${Lhost}/fetch-transaction-details/`,
           { txhash: value },
           {
             headers: {
@@ -164,7 +164,7 @@ const Visualizer = () => {
         console.log("Scanning Algorand Address:", value);
 
         response = await axios.post(
-          `${DevUrl}/algo-transfers/`,
+          `${Lhost}/algo-transfers/`,
           {
             address: value,
             startDate: formData?.fromDate || null,
@@ -187,7 +187,7 @@ const Visualizer = () => {
         console.log("Scanning Algorand Transaction ID:", value);
 
         response = await axios.post(
-          `${DevUrl}/algo-transaction-details/`,
+          `${Lhost}/algo-transaction-details/`,
           { txId: value },
           {
             headers: {
@@ -217,7 +217,7 @@ const Visualizer = () => {
 
       try {
         const response = await axios.post(
-          `${DevUrl}/token-transfers/`,
+          `${Lhost}/token-transfers/`,
           {
             address: address,
             blockNum: blockNum,
@@ -247,7 +247,7 @@ const Visualizer = () => {
       console.log("Scanning Algorand Address:", address);
 
       const response = await axios.post(
-        `${DevUrl}/algo-transfers/`,
+        `${Lhost}/algo-transfers/`,
         {
           address: address,
           timestamp: blockNum,
@@ -419,7 +419,7 @@ const Visualizer = () => {
     const fetchTokens = async () => {
       // setLoading(true);
       try {
-        const response5 = await axios.post(`${DevUrl}/fetch-tokens`, {
+        const response5 = await axios.post(`${Lhost}/fetch-tokens`, {
           headers: {
             "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json",
@@ -902,12 +902,7 @@ const Visualizer = () => {
                 <div className="border-t-2 border-b-2 border-green-700 rounded-full animate-spin h-14 w-14"></div>
               </div>
             )}
-            <button
-              onClick={togglePopup}
-              className="px-8 py-3 font-semibold text-black transition-all duration-300 bg-green-500 shadow-md w-44 rounded-xl hover:bg-green-600"
-            >
-              Advanced Scan
-            </button>
+            
 
             {isPopupOpen && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
