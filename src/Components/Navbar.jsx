@@ -72,14 +72,15 @@ const Navbar = () => {
     return (
         <nav className="bg-[#303030] p-4  rounded-md flex justify-between items-center mx-4 ">
             <div className="text-white font-bold text-2xl ml-4 ">
-                Secure3
+                Sec3
             </div>
 
 
             <div className="hidden lg:flex space-x-8 text-white">
-                <Link to="/" className="hover:text-gray-400">Dashboard</Link>
+                <Link to="/" className="hover:text-gray-400">NftLoan</Link>
+                <Link to="/nftmint" className="hover:text-gray-400">NftMint</Link>
                 <Link to="/visualizer" className="hover:text-gray-400">Visualizer</Link>
-                <Link to="/portfoliotracker" className="hover:text-gray-400">Portfolio Tracker</Link>
+                <Link to="/portfoliotracker" className="hover:text-gray-400">Portfolio</Link>
                 
             </div>
             {/* <div className='text-white flex justify-end'>

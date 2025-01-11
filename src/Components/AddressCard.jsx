@@ -11,7 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Lhost } from "../Constants";
 import { useLocation } from "react-router-dom";
-import Footer from "./Footer";
+
 
 const AddressCard = () => {
   
@@ -279,14 +279,10 @@ const AddressCard = () => {
       <div className="flex items-center justify-center overflow-x-hidden ">
         <div className="lg:mt-10 md:mt-20">
           <h1 className="mb-4 text-3xl font-bold text-center text-black dark:text-white">
-            SecureTrace PortfolioTracker
+           Portfolio
           </h1>
 
-          <p className="max-w-2xl mb-6 font-semibold text-center text-gray-600 dark:text-gray-300">
-            SecureTrace analyzes transaction data using specialized blockchain
-            forensic techniques, enhancing the detection of intricate patterns
-            and potential vulnerabilities.
-          </p>
+          
         </div>
       </div>
       <div className="flex items-center justify-center mt-6 mb-6">
@@ -297,14 +293,14 @@ const AddressCard = () => {
             disabled={loading}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Enter address value"
-            className="w-full px-4 py-3 mx-2 mb-4 border border-gray-300 shadow-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent sm:mb-0"
+            className="w-full px-4 py-3 mx-2 mb-4 border border-gray-300 shadow-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent sm:mb-0"
           />
           <button
             onClick={handleScanNow}
             disabled={loading}
-            className="w-56 px-8 py-3 font-semibold text-black transition-all duration-300 bg-green-500 shadow-md lg:w-40 rounded-xl hover:bg-green-600"
+            className="w-56 px-8 py-3 font-semibold text-black transition-all duration-300 rounded-md bg-white shadow-md lg:w-40 rounded-x l hover:bg-black hover:text-white"
           >
-            Scan Now
+            Check
           </button>
         </div>
       </div>
@@ -894,9 +890,7 @@ const AddressCard = () => {
         pauseOnFocusLoss
         theme="colored"
       />
-      <div className="pt-20">
-        <Footer />
-      </div>
+      
     </div>
   );
 };

@@ -5,9 +5,11 @@ import PortfolioTracker from "./Components/PortfolioTracker";
 import Visualizer from "./Components/Visualizer";
 
 import Navbar from "./Components/Navbar";
+import NftLoan from "./Components/NftLoan";
+import NftMint from "./Components/NftMint";
 
 
-// import SecureTransaction from "./Components/SecureTransaction";
+
 
 
 function App() {
@@ -18,8 +20,10 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        
         <Route path="/portfoliotracker" element={<PortfolioTracker />} />
+        <Route path="/nftmint" element={<NftMint />} />
+        <Route path="/" element={<NftLoan />} />
         <Route path="/visualizer/:txHash" component={<Visualizer />} />
         <Route path="/visualizer" element={<Visualizer />} />
       

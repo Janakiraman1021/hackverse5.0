@@ -8,7 +8,7 @@ import axios from "axios";
 import { Lhost } from "../Constants";
 import btc from "../Assests/Bitcoin.png";
 import { useParams } from "react-router-dom";
-import Footer from "./Footer";
+
 // import Navbar from './Navbar';
 import cytoscape from "cytoscape";
 
@@ -872,13 +872,9 @@ const Visualizer = () => {
         {!isInputEntered && (
           <>
             <h1 className="mb-6 text-3xl font-bold text-center text-black dark:text-white">
-              SecureTrace Visualizer
+            Visualizer
             </h1>
-            <p className="max-w-2xl mb-10 font-semibold text-center text-gray-600 dark:text-gray-300">
-              SecureTrace analyzes transaction data using blockchain forensic
-              techniques, enhancing the detection of intricate patterns and
-              potential vulnerabilities.
-            </p>
+            
           </>
         )}
         <div className="flex flex-col items-center w-full sm:flex-row md:max-w-4xl">
@@ -887,13 +883,13 @@ const Visualizer = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value.trim())}
             placeholder="Enter tx hash or address value"
-            className="w-full px-4 py-3 mb-4 border border-gray-300 shadow-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent sm:mb-0 sm:mr-4"
+            className="w-full px-4 py-3 mb-4 border border-gray-300 shadow-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent sm:mb-0 sm:mr-4"
           />
           <div className="flex gap-4">
             <button
               onClick={handleScanClick}
               disabled={loading}
-              className="w-40 px-8 py-3 font-semibold text-black transition-all duration-300 bg-green-500 shadow-md rounded-xl hover:bg-green-600"
+              className="w-56 px-8 py-3 font-semibold text-black transition-all duration-300 rounded-md bg-white shadow-md lg:w-40 rounded-x l hover:bg-black hover:text-white"
             >
               {loading ? "Scanning..." : "Scan Now"}
             </button>
@@ -1454,9 +1450,7 @@ const Visualizer = () => {
           </div>
         )}
       </div>
-      <div className="">
-        <Footer />
-      </div>
+      
     </div>
   );
 };

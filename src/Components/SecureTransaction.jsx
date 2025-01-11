@@ -146,7 +146,7 @@ const SecureTransaction = () => {
       <div className="">
         <div className="flex flex-col items-center justify-center px-4 py-10">
           <h1 className="mb-4 text-3xl font-bold text-center text-black dark:text-white">
-            Secure3 
+            Sec3 
           </h1>
 
           <form onSubmit={handleSearchSubmit} className="w-full md:max-w-4xl">
@@ -162,9 +162,8 @@ const SecureTransaction = () => {
               <button
                 type="submit"
                 disabled={!inputValue}
-                className="px-8 py-3 mt-6 font-semibold text-black transition-all duration-300 bg-green-500 shadow-md w-60 rounded-xl hover:bg-green-600"
-              >
-                Scan Now
+                className="w-56 px-8 py-3 font-semibold text-black transition-all duration-300 rounded-md bg-white shadow-md lg:w-40 rounded-x l hover:bg-black hover:text-white">
+                Check Now
               </button>
             </div>
           </form>

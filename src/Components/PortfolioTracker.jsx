@@ -2,7 +2,7 @@ import React from 'react';
 import Transfer from './Transfer';
 import Portfolio from './Portfolio';
 import AddressCard from './AddressCard';
-import Footer from './Footer';
+
 
 const PortfolioTracker = () => {
     return (
