@@ -276,15 +276,19 @@ const AddressCard = () => {
 
   return (
     <div className="bg-white dark:bg-[#001938]">
-      <div className="flex items-center justify-center overflow-x-hidden ">
-        <div className="lg:mt-10 md:mt-20">
-          <h1 className="mb-4 text-3xl font-bold text-center text-black dark:text-white">
-           Portfolio
-          </h1>
+      <div className="flex items-center justify-center overflow-x-hidden">
+  <div className="lg:mt-10 md:mt-20 w-full max-w-4xl px-4">
+    <h1 className="mb-4 text-3xl font-bold text-center text-black dark:text-white">
+      Portfolio
+    </h1>
+    <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md">
+      <p className="text-lg text-gray-800 dark:text-gray-200">
+        This update allows users to view all assets in their portfolio by default, regardless of the chain they belong to. They can also filter assets by selecting a specific blockchain (e.g., Ethereum, Binance Smart Chain, etc.) from a dropdown. If "All Chains" is selected, all assets will be displayed together, ensuring that users can see their complete portfolio in one place while still having the option to filter by chain when needed.
+      </p>
+    </div>
+  </div>
+</div>
 
-          
-        </div>
-      </div>
       <div className="flex items-center justify-center mt-6 mb-6">
         <div className="flex flex-col items-center sm:flex-row w-80 md:w-full md:max-w-3xl ">
           <input
@@ -295,7 +299,7 @@ const AddressCard = () => {
             placeholder="Enter address value"
             className="w-full px-4 py-3 mx-2 mb-4 border border-gray-300 shadow-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent sm:mb-0"
           />
-          <button
+         <button
             onClick={handleScanNow}
             disabled={loading}
             className="w-56 px-8 py-3 font-semibold text-black transition-all duration-300 rounded-md bg-white shadow-md lg:w-40 rounded-x l hover:bg-black hover:text-white"

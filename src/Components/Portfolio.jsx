@@ -1,27 +1,17 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import Port from "../Assests/Portfolio.png";
-import { TiArrowSortedDown } from "react-icons/ti";
-import axios from "axios";
-
 const Portfolio = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const chains = ['Ethereum', 'Binance Smart Chain', 'Polygon', 'Avalanche'];
+    const chains = ["All Chains", "Ethereum", "Binance Smart Chain", "Polygon", "Avalanche"];
     const [loading, setLoading] = useState(false);
-    const [portfolioData, SetPortfolioData] = useState([]);
-    const rowsPerPage = 10;
-    const [currentPage, setCurrentPage] = useState(1);
+    const [portfolioData, setPortfolioData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
+    const [selectedChain, setSelectedChain] = useState("All Chains");
     const [totalValue, setTotalValue] = useState(0);
 
-    const data = [
-        { asset: 'Berry', price: '$00.00K', change: '+0.00', holdings: '00.000 Berry', value: '$00.00K' },
-        { asset: 'USDI', price: '$00.00K', change: '+0.00', holdings: '00.00K USDI', value: '$00.00K' },
-    ];
+    const rowsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
-    const totalPages = Math.ceil(portfolioData.length / rowsPerPage);
-
-
-    const currentRows = portfolioData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+    const currentRows = filteredData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
 
     const handlePageChange = (pageNumber) => {
         if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -29,45 +19,35 @@ const Portfolio = () => {
         }
     };
 
-
-    
-
     useEffect(() => {
         const fetchPortfolioTracker = async () => {
             setLoading(true);
-
             try {
                 const response = await axios.get(
                     "https://caiman-wanted-fox.ngrok-free.app/fetch-address-details/0x04b21735E93Fa3f8df70e2Da89e6922616891a88",
                     {
                         headers: {
                             "ngrok-skip-browser-warning": "true",
-
                             "Content-Type": "application/json",
                         },
                     }
                 );
 
-                SetPortfolioData(response.data.tokens[0]);
-                console.log(response.data.tokens[0]);
-
                 const tokens = response.data.tokens[0];
-                // setPortfolioData(tokens);
-                
+                setPortfolioData(tokens);
+                setFilteredData(tokens);
+
                 // Calculate total value
                 const total = tokens.reduce((sum, item) => {
-                    const price = parseFloat(item.tokenPrice);
-                    const holdings = parseFloat(item.tokenBalance);
-                    return sum + (price * holdings);
+                    const price = parseFloat(item.tokenPrice || 0);
+                    const holdings = parseFloat(item.tokenBalance || 0);
+                    return sum + price * holdings;
                 }, 0);
-                
-                setTotalValue(total.toFixed(2));
- 
 
+                setTotalValue(total.toFixed(2));
                 setLoading(false);
             } catch (error) {
-                console.log("error", error);
-
+                console.error("Error:", error);
                 setLoading(false);
             }
         };
@@ -75,54 +55,46 @@ const Portfolio = () => {
         fetchPortfolioTracker();
     }, []);
 
-    useEffect(
-        () => {
-            console.log("portfolio from:", portfolioData.from);
-        }, [portfolioData]
-    )
+    const handleFilterChange = (chain) => {
+        setSelectedChain(chain);
+        if (chain === "All Chains") {
+            setFilteredData(portfolioData); // Show all assets
+        } else {
+            const filtered = portfolioData.filter((item) => item.chainName === chain); // Filter by chain
+            setFilteredData(filtered);
+        }
+        setCurrentPage(1); // Reset to the first page
+    };
 
     return (
         <div>
-            <div className="bg-white p-6  w-full xl:w-[100%] rounded-xl border border-black shadow-md shadow-gray-500">
-                <div className='md:flex gap-1 lg:flex-row justify-between items-start lg:items-center'>
-                    <div className='flex gap-2 items-center mb-4 lg:mb-0'>
-                        <img className='h-8 w-8' src={Port} alt='portfolio' />
+            <div className="bg-white p-6 w-full xl:w-[100%] rounded-xl border border-black shadow-md shadow-gray-500">
+                <div className="md:flex justify-between items-center">
+                    <div className="flex gap-2 items-center mb-4 lg:mb-0">
+                        <img className="h-8 w-8" src={Port} alt="portfolio" />
                         <h3 className="text-xl lg:text-2xl font-semibold">Portfolio</h3>
-                        <div className="flex items-center">
-                        <button
-                            className={`px-4 py-2 font-bold ${currentPage === 1 ? 'cursor-not-allowed opacity-50 ' : 'cursor-pointer'}`}
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"><path fill="black" d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0" /></svg>
-                        </button>
-                        <span className='font-bold text-xl'>
-                            {currentPage} / {totalPages}
-                        </span>
-                        <button
-                            className={`px-4 py-2 font-bold ${currentPage === totalPages ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12 24"><path fill="black" fill-rule="evenodd" d="M10.157 12.711L4.5 18.368l-1.414-1.414l4.95-4.95l-4.95-4.95L4.5 5.64l5.657 5.657a1 1 0 0 1 0 1.414" /></svg>
-                        </button>
+                        <p>This update allows users to view all assets in their portfolio by default, regardless of the chain they belong to. They can also filter assets by selecting a specific blockchain (e.g., Ethereum, Binance Smart Chain, etc.) from a dropdown. If "All Chains" is selected, all assets will be displayed together, ensuring that users can see their complete portfolio in one place while still having the option to filter by chain when needed.</p>
                     </div>
-                    </div>
-                
-                    <div className='flex justify-end'>
-                        <button onClick={() => setIsOpen(!isOpen)} className="flex gap-2 md:gap-6 items-center px-3 py-2 bg-gradient-to-t from-[#d3d3d3] to-white text-black rounded-lg border border-black shadow-md hover:bg-gray-300 transition">
-                            <span className="font-semibold">Filter by Chain</span>
+                    <div className="flex items-center gap-4">
+                        <div className="text-lg font-bold">
+                            Total Value: ${totalValue}
+                        </div>
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-t from-[#d3d3d3] to-white text-black rounded-lg border border-black shadow-md hover:bg-gray-300 transition"
+                        >
+                            <span className="font-semibold">Filter: {selectedChain}</span>
                             <TiArrowSortedDown />
                         </button>
                         {isOpen && (
-                            <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
+                            <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
                                 {chains.map((chain, index) => (
                                     <div
                                         key={index}
                                         className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
                                         onClick={() => {
-                                            console.log(`Selected chain: ${chain}`);
-                                            setIsOpen(false); // Close dropdown on select
+                                            handleFilterChange(chain);
+                                            setIsOpen(false); // Close dropdown
                                         }}
                                     >
                                         {chain}
@@ -132,66 +104,64 @@ const Portfolio = () => {
                         )}
                     </div>
                 </div>
-
-                <div className="overflow-x-auto">
-                    <table className="w-full mt-2 text-center">
+                <div className="overflow-x-auto mt-4">
+                    <table className="w-full text-center">
                         <thead>
                             <tr className="h-10">
-                                <th className=' px-4'>Asset</th>
-                                <th className=' px-4'>
-                                    <div className="flex justify-center items-center space-x-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M32 144h448M112 256h288M208 368h96" /></svg>
-                                        <h1>Price</h1>
-                                    </div>
-                                </th>
-                                <th className=' px-4'>
-                                    <div className="flex justify-center items-center space-x-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M32 144h448M112 256h288M208 368h96" /></svg>
-                                        <h1>Holdings</h1>
-                                    </div>
-                                </th>
-                                <th className=' px-4'>
-                                    <div className="flex justify-center items-center space-x-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M32 144h448M112 256h288M208 368h96" /></svg>
-                                        <h1>Value</h1>
-                                    </div>
-                                </th>
+                                <th>Asset</th>
+                                <th>Price</th>
+                                <th>Holdings</th>
+                                <th>Value</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {currentRows && currentRows.length > 0 ? (
+                            {currentRows.length > 0 ? (
                                 currentRows.map((item, index) => {
                                     const asset = item.tokenName;
-                                    const price = parseFloat(item.tokenPrice).toFixed(2);
-                                    const holdings = parseFloat(item.tokenBalance).toFixed(4);
-                                    const value = (price * holdings).toFixed(2); // Calculate value as price * balance
-
+                                    const price = parseFloat(item.tokenPrice || 0).toFixed(2);
+                                    const holdings = parseFloat(item.tokenBalance || 0).toFixed(4);
+                                    const value = (price * holdings).toFixed(2);
                                     return (
                                         <tr key={index} className="border-t h-12 odd:bg-[#F4F4F4] even:bg-white">
-                                            <td className='px-4'>{asset}</td>
-                                            <td className='px-4'>${price}</td>
-                                            <td className='px-4'>{holdings}</td>
-                                            <td className='px-4'>${value}</td>
+                                            <td>{asset}</td>
+                                            <td>${price}</td>
+                                            <td>{holdings}</td>
+                                            <td>${value}</td>
                                         </tr>
                                     );
                                 })
                             ) : (
-                                data.map((item, index) => (
-                                    <tr key={index} className="border-t h-12 odd:bg-[#F4F4F4] even:bg-white">
-                                        <td>{item.asset}</td>
-                                        <td>{item.price} <span className="text-green-500">{item.change}</span></td>
-                                        <td>{item.holdings}</td>
-                                        <td>{item.value}</td>
-                                    </tr>
-                                ))
+                                <tr>
+                                    <td colSpan="4" className="text-gray-500">
+                                        No data available.
+                                    </td>
+                                </tr>
                             )}
                         </tbody>
-
                     </table>
+                </div>
+                <div className="flex justify-center mt-4">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`px-4 py-2 font-bold ${currentPage === 1 ? "cursor-not-allowed opacity-50" : ""}`}
+                    >
+                        Previous
+                    </button>
+                    <span className="mx-4">
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={`px-4 py-2 font-bold ${currentPage === totalPages ? "cursor-not-allowed opacity-50" : ""}`}
+                    >
+                        Next
+                    </button>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Portfolio;
