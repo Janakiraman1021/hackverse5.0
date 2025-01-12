@@ -29,6 +29,9 @@ const Portfolio = () => {
         }
     };
 
+
+    
+
     useEffect(() => {
         const fetchPortfolioTracker = async () => {
             setLoading(true);
