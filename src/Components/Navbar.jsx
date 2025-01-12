@@ -79,7 +79,6 @@ const Navbar = () => {
             <div className="hidden lg:flex space-x-8 text-white">
                 <Link to="/nftloan" className="hover:text-gray-400">NftLoan</Link>
                 <Link to="/nftmint" className="hover:text-gray-400">NftMint</Link>
-                <Link to="/visualizer" className="hover:text-gray-400">Visualizer</Link>
                 <Link to="/" className="hover:text-gray-400">Visualizer</Link>
                 <Link to="/portfoliotracker" className="hover:text-gray-400">Portfolio</Link>
                 
